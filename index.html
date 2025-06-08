@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Editor</title>
+
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Pyodide for Python execution -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Code Editor</h1>
+    <div class="controls">
+      <select id="language-selector">
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="csharp">C#</option>
+        <option value="cpp">C++</option>
+      </select>
+      <button id="run-button">Run Code</button>
+      <button id="reset-button">Reset</button>
+      <label style="display: flex; align-items: center; margin-left: 10px; cursor: pointer;">
+        <input type="checkbox" id="step-mode-toggle" style="margin-right: 5px;">
+        <span>Step Mode</span>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <div class="editor-container">
+      <textarea id="code-editor"></textarea>
+    </div>
+    <div class="output-container">
+      <pre id="output" class="output-text">Run your code to see the output here...</pre>
+      <div id="memory-view" class="memory-view" style="display: none;">
+        <div class="memory-title">Memory State:</div>
+        <div id="memory-content"></div>
+      </div>
+      <div id="execution-controls" class="execution-controls" style="display: none;">
+        <button id="step-button" class="step-button">Step</button>
+        <button id="run-all-button" class="step-button">Run to End</button>
+        <button id="reset-execution-button" class="step-button">Reset Execution</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Input Popup -->
+  <div id="input-popup" class="input-popup">
+    <div class="input-popup-title">Input Required</div>
+    <div class="input-popup-content">
+      <div id="input-prompt"></div>
+      <input type="text" id="input-value" autocomplete="off" />
+    </div>
+    <div class="input-popup-buttons">
+      <button id="input-cancel" class="input-popup-button">Cancel</button>
+      <button id="input-submit" class="input-popup-button primary">Submit</button>
+    </div>
+  </div>
+
+  <!-- CodeMirror JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="index.js"></script>
+</body>
+</html>
